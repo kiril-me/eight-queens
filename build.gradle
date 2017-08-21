@@ -1,0 +1,31 @@
+
+apply plugin: 'java-library'
+apply plugin: 'eclipse'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.anarres.gradle:gradle-stdproject-plugin:1.0.4'
+    }
+}
+
+apply plugin: 'org.anarres.stdproject'
+
+group = "me.kiril.${rootProject.name}"
+
+apply plugin: 'org.anarres.stdmodule'
+stdmodule {
+	description "Eight queens puzzle - https://en.wikipedia.org/wiki/Eight_queens_puzzle"
+	author id: 'kiril', name: 'Kirils Mensikovs', email: 'github@kiril.me'
+	license 'Apache-2.0'
+}
+
+
+dependencies {
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+}
+
