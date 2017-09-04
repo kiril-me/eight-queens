@@ -1,5 +1,7 @@
 package me.kiril.eight.queens;
 
+import java.util.LinkedList;
+
 public class EightQueens {
 
 	private static final int QUEENS = 8;
@@ -18,27 +20,36 @@ public class EightQueens {
 	}
 
 	public boolean solve() {
-		return solve(0);
+		LinkedList<Integer> cols = new LinkedList<>();
+		for(int i = 0; i < size; i++) {
+			cols.add(i);
+		}
+		return solve(0, cols);
 	}
 
-	private boolean solve(int row) {
+	private boolean solve(int row, LinkedList<Integer> cols) {
 		if (row >= size) {
 			return true;
 		}
-		for (int col = 0; col < size; col++) {
-			if (canGo(row, col)) {
+		int colSize = cols.size();
+		for(int i = 0; i < colSize; i++) {
+			int col = cols.removeFirst();
+			if(canGo(row, col)) {
 				board[row] = col;
-				if (solve(row + 1)) {
+				if(solve(row + 1, cols)) {
 					return true;
 				}
 			}
+			cols.add(col);
 		}
 		return false;
 	}
 
 	private boolean canGo(int row, int col) {
 		for (int i = 0; i < row; i++) {
-			if (board[i] == col || (i - row) == (board[i] - col) || (i - row) == (col - board[i])) {
+			int diagonal = i - row;
+			if (diagonal == (board[i] - col) 
+				|| diagonal == (col - board[i])) {
 				return false;
 			}
 		}
