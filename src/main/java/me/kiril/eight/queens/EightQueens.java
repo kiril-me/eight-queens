@@ -1,3 +1,18 @@
+/**
+ * Copyright 2017 Kirils Mensikovs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package me.kiril.eight.queens;
 
 import java.util.LinkedList;
@@ -21,7 +36,7 @@ public class EightQueens {
 
 	public boolean solve() {
 		LinkedList<Integer> cols = new LinkedList<>();
-		for(int i = 0; i < size; i++) {
+		for (int i = 0; i < size; i++) {
 			cols.add(i);
 		}
 		return solve(0, cols);
@@ -32,11 +47,11 @@ public class EightQueens {
 			return true;
 		}
 		int colSize = cols.size();
-		for(int i = 0; i < colSize; i++) {
+		for (int i = 0; i < colSize; i++) {
 			int col = cols.removeFirst();
-			if(canGo(row, col)) {
+			if (canGo(row, col)) {
 				board[row] = col;
-				if(solve(row + 1, cols)) {
+				if (solve(row + 1, cols)) {
 					return true;
 				}
 			}
@@ -48,8 +63,7 @@ public class EightQueens {
 	private boolean canGo(int row, int col) {
 		for (int i = 0; i < row; i++) {
 			int diagonal = i - row;
-			if (diagonal == (board[i] - col) 
-				|| diagonal == (col - board[i])) {
+			if (diagonal == (board[i] - col) || diagonal == (col - board[i])) {
 				return false;
 			}
 		}
@@ -59,10 +73,10 @@ public class EightQueens {
 	public void print() {
 		for (int r = 0; r < size; r++) {
 			for (int c = 0; c < size; c++) {
-				if(c > 0) {
+				if (c > 0) {
 					System.out.print(" ");
 				}
-				if(board[r] == c) {
+				if (board[r] == c) {
 					System.out.print("X");
 				} else {
 					System.out.print("O");
